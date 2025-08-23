@@ -299,7 +299,9 @@ const Sidemenu: React.FC<{
       )}
 
       {/* Separator Line */}
-      <div style={{ height: '1px', backgroundColor: '#dfe5e8', width: '100%' }} />
+      {!isCollapsed && (
+        <div style={{ height: '1px', backgroundColor: '#dfe5e8', width: '100%' }} />
+      )}
 
       {/* User Avatar */}
       <div style={{ padding: '24px 40px 24px 40px' }}>
@@ -367,7 +369,9 @@ const Sidemenu: React.FC<{
       </div>
 
       {/* Separator Line */}
-      <div style={{ height: '1px', backgroundColor: '#dfe5e8', width: '100%' }} />
+      {!isCollapsed && (
+        <div style={{ height: '1px', backgroundColor: '#dfe5e8', width: '100%' }} />
+      )}
 
       {/* Copyright */}
       {!isCollapsed && (
