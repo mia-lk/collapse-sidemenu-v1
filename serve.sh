@@ -13,10 +13,16 @@ echo ""
 echo "Press Ctrl+C to stop the server"
 echo ""
 
+# Build for local development first
+echo "🔨 Building for local development..."
+npm run build
+
 # Check if Python 3 is available
 if command -v python3 &> /dev/null; then
+    echo "🌐 Starting server with local build..."
     python3 -m http.server 8000 --directory dist
 elif command -v python &> /dev/null; then
+    echo "🌐 Starting server with local build..."
     python -m SimpleHTTPServer 8000
 else
     echo "❌ Python not found. Please install Python or use a different method."
