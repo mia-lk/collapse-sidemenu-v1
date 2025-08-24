@@ -69,8 +69,10 @@ const Sidemenu: React.FC<{
       display: 'flex',
       flexDirection: 'column',
       transition: 'width 0.3s ease',
-      position: 'relative',
-      zIndex: 3
+      position: currentPage === 'tech-support' ? 'absolute' : 'relative',
+      left: currentPage === 'tech-support' ? '0' : 'auto',
+      top: currentPage === 'tech-support' ? '0' : 'auto',
+      zIndex: currentPage === 'tech-support' ? 4 : 3
     }}>
       {/* Brand Section */}
       <div style={{ padding: '40px 40px 0 40px' }}>
@@ -1087,7 +1089,7 @@ const App: React.FC = () => {
 
   const getMainContentMargin = () => {
     if (currentPage === 'tech-support') {
-      return '380px'; // Always 140px + 240px for secondary sidemenu, regardless of main menu state
+      return '380px'; // Always 380px for tech support page, regardless of main menu state
     }
     return isSidemenuCollapsed ? '140px' : '312px';
   };
@@ -1097,7 +1099,8 @@ const App: React.FC = () => {
       fontFamily: "'Source Sans Pro', system-ui, -apple-system, sans-serif",
       display: 'flex',
       minHeight: '100vh',
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
+      position: 'relative'
     }}>
       {/* Main Sidemenu */}
       <Sidemenu
