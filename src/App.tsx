@@ -1073,18 +1073,32 @@ const TechSupportPage: React.FC = () => {
 
 // Main App Component
 const App: React.FC = () => {
-  const [isSidemenuCollapsed, setIsSidemenuCollapsed] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
+  const [manualToggleState, setManualToggleState] = useState<boolean | null>(null);
+
+  // Determine if current page has a secondary menu
+  const hasSecondaryMenu = (page: string): boolean => {
+    return page === 'tech-support';
+  };
+
+  // Determine the collapsed state based on page and manual override
+  const isSidemenuCollapsed = (() => {
+    if (manualToggleState !== null) {
+      // User has manually toggled, respect their choice
+      return manualToggleState;
+    }
+    // Default behavior: collapsed if page has secondary menu, expanded otherwise
+    return hasSecondaryMenu(currentPage);
+  })();
 
   const handleToggleSidemenu = () => {
-    setIsSidemenuCollapsed(!isSidemenuCollapsed);
+    setManualToggleState(!isSidemenuCollapsed);
   };
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
-    if (page === 'tech-support') {
-      setIsSidemenuCollapsed(true);
-    }
+    // Reset manual toggle state when navigating to let default behavior take effect
+    setManualToggleState(null);
   };
 
   const getMainContentMargin = () => {
